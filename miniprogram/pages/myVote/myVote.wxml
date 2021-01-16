@@ -1,0 +1,7 @@
+<view class="container">
+    <block wx:for="{{voteList}}" wx:key="index">
+        <view class="vote" bindtap="onTapVote" data-vote-id="{{item._id}}">
+            {{item.voteTitle}}
+        </view>
+    </block>
+</view>

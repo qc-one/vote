@@ -1,56 +1,88 @@
 {
-	"miniprogramRoot": "miniprogram/",
-	"cloudfunctionRoot": "cloudfunctions/",
-	"setting": {
-		"urlCheck": true,
-		"scopeDataCheck": false,
-		"coverView": true,
-		"es6": true,
-		"postcss": true,
-		"compileHotReLoad": false,
-		"preloadBackgroundData": false,
-		"minified": true,
-		"autoAudits": false,
-		"newFeature": true,
-		"uglifyFileName": false,
-		"uploadWithSourceMap": true,
-		"useIsolateContext": true,
-		"nodeModules": false,
-		"enhance": true,
-		"useCompilerModule": true,
-		"userConfirmedUseCompilerModuleSwitch": false,
-		"showShadowRootInWxmlPanel": true
-	},
-	"appid": "wxe31ffcdf9bb4ef0b",
-	"projectname": "vote",
-	"libVersion": "2.8.1",
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
-	"condition": {
-		"search": {
-			"current": -1,
-			"list": []
-		},
-		"conversation": {
-			"current": -1,
-			"list": []
-		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
-		"game": {
-			"list": []
-		},
-		"miniprogram": {
-			"current": 0,
-			"list": [
-				{
-					"id": -1,
-					"name": "db guide",
-					"pathName": "pages/databaseGuide/databaseGuide"
-				}
-			]
-		}
-	}
+    "miniprogramRoot": "miniprogram/",
+    "cloudfunctionRoot": "cloudfunctions/",
+    "setting": {
+        "urlCheck": true,
+        "es6": true,
+        "enhance": true,
+        "postcss": true,
+        "preloadBackgroundData": false,
+        "minified": true,
+        "newFeature": true,
+        "coverView": true,
+        "nodeModules": false,
+        "autoAudits": false,
+        "showShadowRootInWxmlPanel": true,
+        "scopeDataCheck": false,
+        "uglifyFileName": false,
+        "checkInvalidKey": true,
+        "checkSiteMap": true,
+        "uploadWithSourceMap": true,
+        "compileHotReLoad": false,
+        "babelSetting": {
+            "ignore": [],
+            "disablePlugins": [],
+            "outputPath": ""
+        },
+        "useIsolateContext": true,
+        "useCompilerModule": true,
+        "userConfirmedUseCompilerModuleSwitch": false,
+        "useMultiFrameRuntime": true,
+        "bundle": false,
+        "useApiHook": true,
+        "useApiHostProcess": true
+    },
+    "appid": "wxe31ffcdf9bb4ef0b",
+    "projectname": "vote",
+    "libVersion": "2.8.1",
+    "simulatorType": "wechat",
+    "simulatorPluginLibVersion": {},
+    "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
+    "condition": {
+        "plugin": {
+            "list": []
+        },
+        "game": {
+            "list": []
+        },
+        "gamePlugin": {
+            "list": []
+        },
+        "miniprogram": {
+            "list": [
+                {
+                    "id": -1,
+                    "name": "db guide",
+                    "pathName": "pages/databaseGuide/databaseGuide",
+                    "query": ""
+                },
+                {
+                    "id": -1,
+                    "name": "pages/index/index",
+                    "pathName": "pages/index/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/createVote/createVote",
+                    "pathName": "pages/createVote/createVote",
+                    "query": "voteID=b45a21d55ffc64670477b50064abc4d3",
+                    "scene": null
+                },
+                {
+                    "name": "pages/vote/vote",
+                    "pathName": "pages/vote/vote",
+                    "query": "voteID=b45a21d55ffc64670477b50064abc4d3",
+                    "scene": null
+                },
+                {
+                    "id": 4,
+                    "name": "pages/myVote/myVote",
+                    "pathName": "pages/myVote/myVote",
+                    "query": "",
+                    "scene": null
+                }
+            ]
+        }
+    }
 }

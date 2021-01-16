@@ -1,0 +1,71 @@
+.container {
+  padding: 30rpx;
+  box-sizing: border-box;
+}
+.form-title {
+  color: #333;
+  font-size: 20pt;
+  font-weight: bold;
+  height: 25rpx;
+  border-bottom: 1rpx solid #eee;
+  padding: 20rpx 0;
+  box-sizing: content-box;
+}
+.form-title-placeholder {
+  color: #ccc;
+}
+.form-desc {
+  margin-top: 40rpx;
+  width: 100%;
+  color: #333;
+  font-size: 14pt;
+  border-bottom: 1rpx solid #eee;
+  padding: 20rpx 0;
+  box-sizing: content-box;
+}
+.form-text-placeholder {
+  color: #ccc;
+}
+.btn-add-option {
+  font-size: 12pt;
+  color: #26ab28;
+  padding: 40rpx 0;
+}
+.form-option {
+  margin-top: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.form-input-wrapper {
+  color: #333;
+  font-size: 12pt;
+  border-bottom: 1rpx solid #eee;
+  padding: 20rpx 0;
+  flex: 1;
+}
+.del-btn {
+  margin-right: 20rpx;
+}
+.form-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1rpx solid #eee;
+  padding: 20rpx 0;
+  margin-top: 20rpx;
+}
+.form-item-label {
+  font-size: 12pt;
+  color: #333;
+}
+.form-item-picker {
+  font-size: 12pt;
+  color: #999;
+}
+.form-btn-group {
+  padding: 40rpx 0;
+}
+.form-btn {
+  margin-top: 20rpx;
+}

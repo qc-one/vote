@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "navigationBarTitleText": "投票小程序 - 首页",
+  "usingComponents": {},
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#F00",
+  "backgroundTextStyle": "dark"
 }

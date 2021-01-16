@@ -1,0 +1,52 @@
+<view class="container">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <input 
+      class="form-title" 
+      placeholder="投票标题" 
+      focus="true" 
+      placeholder-class="form-title-placeholder" 
+      bindinput="onInputChange"></input>
+    <textarea 
+      value="{{formDesc}}" 
+      class="form-desc" 
+      bindtap="onDescChange" 
+      auto-height="true" 
+      placeholder="补充描述（选填）" 
+      placeholder-class="form-text-placeholder"></textarea>
+    <view wx:for="{{optionList}}" wx:key="index" class="form-option">
+      <icon type="cancel" bindtap="onTapDelOption" data-option-index="{{index}}" class="del-btn"></icon>
+      <view class="form-input-wrapper">
+        <input 
+          class="form-title" 
+          placeholder="选项" 
+          placeholder-class="form-text-placeholder" 
+          bindinput="onOptionInputChange"
+          data-option-index="{{index}}"></input>
+      </view>
+    </view>
+    <view class="btn-add-option" bindtap="onTapAddOption">+ 添加选项</view>
+    <view class="form-item">
+      <text class="form-item-label">截止日期</text>
+      <picker
+        class="form-item-picker"
+        mode="date"
+        value="{{endDate}}"
+        start="{{nowDate}}"
+        bindchange="onChangeEndDate">{{endDate}}</picker>
+    </view>
+    <view class="form-item">
+      <text class="form-item-label">匿名投票</text>
+      <switch
+        checked="{{isAnonymous}}" bindchange="onChangeIsAnonymous"></switch>
+    </view>
+    <view class="form-btn-froup">
+      <button 
+        class="form-btn" 
+        type="primary" 
+        form-type="submit">完成</button>
+      <button 
+        class="form-btn" 
+        form-type="reset">重置</button>
+    </view>
+  </form>
+</view>

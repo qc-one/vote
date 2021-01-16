@@ -3,21 +3,18 @@ const app = getApp()
 
 Page({
   data: {
-    avatarUrl: './user-unlogin.png',
-    userInfo: {},
-    logged: false,
-    takeSession: false,
-    requestResult: ''
+    // 获取分页数据
+    pageData: [],
+    // 页码
+    nextPage: 0
   },
-
-  onLoad: function() {
+  onLoad: function () {
     if (!wx.cloud) {
       wx.redirectTo({
         url: '../chooseLib/chooseLib',
       })
       return
     }
-
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -34,85 +31,90 @@ Page({
         }
       }
     })
+    this.getNextPageData();
   },
-
-  onGetUserInfo: function(e) {
-    if (!this.data.logged && e.detail.userInfo) {
-      this.setData({
-        logged: true,
-        avatarUrl: e.detail.userInfo.avatarUrl,
-        userInfo: e.detail.userInfo
-      })
-    }
-  },
-
-  onGetOpenid: function() {
-    // 调用云函数
-    wx.cloud.callFunction({
-      name: 'login',
-      data: {},
-      success: res => {
-        console.log('[云函数] [login] user openid: ', res.result.openid)
-        app.globalData.openid = res.result.openid
-        wx.navigateTo({
-          url: '../userConsole/userConsole',
-        })
-      },
-      fail: err => {
-        console.error('[云函数] [login] 调用失败', err)
-        wx.navigateTo({
-          url: '../deployFunctions/deployFunctions',
-        })
-      }
+  onTapCreateRadioVote() {
+    wx.navigateTo({
+      url: '/pages/createVote/createVote?type=radio',
     })
   },
-
+  onTapCreateMultiChoiveVote() {
+    wx.navigateTo({
+      url: '/pages/createVote/createVote?type=multiple',
+    })
+  },
+  // 分页
+  getNextPageData() {
+    const PAGE_COUNT = 20;
+    const db = wx.cloud.database();
+    db.collection('todos').count().then(res => {
+      const totalCount = res.total;
+      const totalPages = Math.ceil(totalCount / PAGE_COUNT);
+      if (this.data.nextPage < totalPages) {
+        db.collection('todos')
+        .skip(this.data.nextPage * PAGE_COUNT) // 跳过已有的数据
+        .limit(PAGE_COUNT) // 获取新的20条数据
+        .get().then(data => {
+          const pageData = this.data.pageData.concat(data.data);
+          this.setData({
+            pageData,
+            nextPage: this.data.nextPage + 1
+          })
+        })
+      }
+      else {
+        console.log('数据已经加载完毕');
+      }
+    });
+  },
   // 上传图片
-  doUpload: function () {
-    // 选择图片
+  uploadFile() {
     wx.chooseImage({
       count: 1,
-      sizeType: ['compressed'],
-      sourceType: ['album', 'camera'],
-      success: function (res) {
-        wx.showLoading({
-          title: '上传中',
-        })
-
-        const filePath = res.tempFilePaths[0]
-        
-        // 上传图片
-        const cloudPath = `my-image${filePath.match(/\.[^.]+?$/)[0]}`
-        wx.cloud.uploadFile({
-          cloudPath,
-          filePath,
-          success: res => {
-            console.log('[上传文件] 成功：', res)
-
-            app.globalData.fileID = res.fileID
-            app.globalData.cloudPath = cloudPath
-            app.globalData.imagePath = filePath
-            
-            wx.navigateTo({
-              url: '../storageConsole/storageConsole'
-            })
+      success(res) {
+        console.log(res);
+        let tempFilePath = res.tempFilePaths;
+        const uploadTatk = wx.cloud.uploadFile({
+          cloudPath: 'test/1.png',
+          filePath: tempFilePath[0],
+          success(res) {
+            console.log(res);
           },
-          fail: e => {
-            console.error('[上传文件] 失败：', e)
-            wx.showToast({
-              icon: 'none',
-              title: '上传失败',
-            })
-          },
-          complete: () => {
-            wx.hideLoading()
+          fail(err) {
+            console.log(err);
           }
         })
-      },
-      fail: e => {
-        console.error(e)
       }
     })
+    // console.log('shagchuan');
+    // const uploadTatk = wx.cloud.uploadFile({
+    //   cloudPath: 'test/1.png',
+    //   filePath: 'D://upload//img',
+    //   success(res) {
+    //     console.log(res);
+    //   },
+    //   fail(err) {
+    //     console.log(err);
+    //   }
+    // })
+    // 在uploadTask对象上可以设置上传进度的监听回调
+    // uploadTatk.onProgressUpdate(res => {
+    //   console.log('上传进度', res);
+    // })
+    // 也可以通过uploadTask上面的abort方法取消上传任务
+    // uploadTatk.abort();
   },
-
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+    console.log('上拉');
+  },
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+    console.log('下拉');
+    this.getNextPageData();
+  },
 })
